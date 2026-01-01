@@ -1,0 +1,12 @@
+go mod init go-unit-test
+
+go test
+go test -v
+go test -v -run=TestNamaFunction
+go test -v ./...  
+go test -run TestNamaFunction/NamaSubTest
+
+
+# benchmark
+go test -v -bench=.
+go test -v -run=NoUnitTest -bench=.

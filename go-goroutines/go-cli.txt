@@ -1,0 +1,4 @@
+go mod init go-goroutines
+
+export CGO_ENABLED=1
+go test -race -run=TestNamaFunction

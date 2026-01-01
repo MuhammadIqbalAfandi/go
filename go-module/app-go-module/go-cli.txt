@@ -1,0 +1,7 @@
+#get module
+go get github.com/MuhammadIqbalAfandi/go-say-hello
+go get
+
+#clear package
+go clean -modcache
+go mod tidy
