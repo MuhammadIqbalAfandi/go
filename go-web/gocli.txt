@@ -1,0 +1,5 @@
+go mod init go-web
+
+go test -v -run=TestNamaFunction
+
+go run namafile.go

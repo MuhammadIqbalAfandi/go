@@ -1,11 +1,12 @@
-package go_web
+//go:build ignore
+
+package main
 
 import (
 	"net/http"
-	"testing"
 )
 
-func TestServer(t *testing.T) {
+func main() {
 	server := http.Server {
 		Addr: "localhost:8080",
 	}

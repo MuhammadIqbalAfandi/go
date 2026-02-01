@@ -1,3 +1,3 @@
 go mod init go-basic
 go build
-go run namaFile.go
+go run namafile.go
