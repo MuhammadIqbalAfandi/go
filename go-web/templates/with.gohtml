@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>width</title>
+  </head>
+  <body>
+    {{/* a comment */}}
+    {{- /* Using 'with' to create a new scope for .Address */ -}}
+    Name: {{.Name}}
+    {{ with .Address }}
+    <h1>Address Details:</h1>
+    <p>Street: {{.Street}}</p>
+    <p>City: {{.City}}</p>
+    <p>Zip Code: {{.ZipCode}}</p>
+    {{else}}
+    <h1>No Address Provided</h1>
+    {{ end }}
+  </body>
+</html>
