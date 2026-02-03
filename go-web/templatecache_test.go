@@ -1,4 +1,4 @@
-package go_web
+package goweb
 
 import (
 	"embed"
@@ -15,7 +15,7 @@ var templateCache embed.FS
 var myTemplates = template.Must(template.ParseFS(templateCache, "templates/*.gohtml", "templates/partials/*.gohtml"))
 
 func TemplateCaching(writer http.ResponseWriter, request *http.Request) {
-	myTemplates.ExecuteTemplate(writer, "ciaatemplate", map[string]any {
+	myTemplates.ExecuteTemplate(writer, "ciaatemplate", map[string]any{
 		"Name": "Ciaa",
 	})
 }

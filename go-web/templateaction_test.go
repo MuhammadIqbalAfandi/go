@@ -1,4 +1,4 @@
-package go_web
+package goweb
 
 import (
 	"fmt"
@@ -12,8 +12,8 @@ import (
 func TemplateIf(writer http.ResponseWriter, request *http.Request) {
 	t := template.Must(template.ParseFiles("./templates/if.gohtml"))
 
-	t.ExecuteTemplate(writer, "if.gohtml", map[string]any {
-		"Name" : "Ciaa",
+	t.ExecuteTemplate(writer, "if.gohtml", map[string]any{
+		"Name": "Ciaa",
 	})
 }
 
@@ -22,7 +22,7 @@ func TestTemplateIf(t *testing.T) {
 	recorder := httptest.NewRecorder()
 
 	TemplateIf(recorder, request)
-	
+
 	response := recorder.Result()
 	body, _ := io.ReadAll(response.Body)
 	fmt.Println(string(body))
@@ -31,8 +31,8 @@ func TestTemplateIf(t *testing.T) {
 func TemplateComparator(writer http.ResponseWriter, request *http.Request) {
 	t := template.Must(template.ParseFiles("./templates/comparator.gohtml"))
 
-	t.ExecuteTemplate(writer, "comparator.gohtml", map[string]any {
-		"Name" : "Biaa",
+	t.ExecuteTemplate(writer, "comparator.gohtml", map[string]any{
+		"Name": "Biaa",
 	})
 }
 
@@ -41,7 +41,7 @@ func TestTemplateComparator(t *testing.T) {
 	recorder := httptest.NewRecorder()
 
 	TemplateComparator(recorder, request)
-	
+
 	response := recorder.Result()
 	body, _ := io.ReadAll(response.Body)
 	fmt.Println(string(body))
@@ -50,8 +50,8 @@ func TestTemplateComparator(t *testing.T) {
 func TemplateRange(writer http.ResponseWriter, request *http.Request) {
 	t := template.Must(template.ParseFiles("./templates/range.gohtml"))
 
-	t.ExecuteTemplate(writer, "range.gohtml", map[string]any {
-		"Hobbies": []string {
+	t.ExecuteTemplate(writer, "range.gohtml", map[string]any{
+		"Hobbies": []string{
 			"Gaming",
 			"Traveling",
 			"Cooking",
@@ -65,7 +65,7 @@ func TestTemplateRange(t *testing.T) {
 	recorder := httptest.NewRecorder()
 
 	TemplateRange(recorder, request)
-	
+
 	response := recorder.Result()
 	body, _ := io.ReadAll(response.Body)
 	fmt.Println(string(body))
@@ -74,13 +74,13 @@ func TestTemplateRange(t *testing.T) {
 func TemplateWith(writer http.ResponseWriter, request *http.Request) {
 	t := template.Must(template.ParseFiles("./templates/with.gohtml"))
 
-	t.ExecuteTemplate(writer, "with.gohtml", map[string]any {
+	t.ExecuteTemplate(writer, "with.gohtml", map[string]any{
 		"Name": "Ciaa",
-		"Address": map[string]any {
-			"Street": "123 Main Street",
-			"City": "New York",
+		"Address": map[string]any{
+			"Street":  "123 Main Street",
+			"City":    "New York",
 			"ZipCode": "10001",
-		}	,
+		},
 	})
 }
 
@@ -89,7 +89,7 @@ func TestTemplateWith(t *testing.T) {
 	recorder := httptest.NewRecorder()
 
 	TemplateWith(recorder, request)
-	
+
 	response := recorder.Result()
 	body, _ := io.ReadAll(response.Body)
 	fmt.Println(string(body))
@@ -98,14 +98,14 @@ func TestTemplateWith(t *testing.T) {
 func TemplateLayout(writer http.ResponseWriter, request *http.Request) {
 	t := template.Must(template.ParseFiles("./templates/partials/layout.gohtml", "./templates/partials/header.gohtml", "./templates/partials/footer.gohtml"))
 
-	t.ExecuteTemplate(writer, "ciaatemplate", map[string]any {
+	t.ExecuteTemplate(writer, "ciaatemplate", map[string]any{
 		"Title": "Welcome to My Website",
-		"Name": "Ciaa",
-		"Address": map[string]any {
-			"Street": "123 Main Street",
-			"City": "New York",
+		"Name":  "Ciaa",
+		"Address": map[string]any{
+			"Street":  "123 Main Street",
+			"City":    "New York",
 			"ZipCode": "10001",
-		}	,
+		},
 	})
 }
 
@@ -114,7 +114,7 @@ func TestTemplateLayout(t *testing.T) {
 	recorder := httptest.NewRecorder()
 
 	TemplateLayout(recorder, request)
-	
+
 	response := recorder.Result()
 	body, _ := io.ReadAll(response.Body)
 	fmt.Println(string(body))

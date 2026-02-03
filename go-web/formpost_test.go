@@ -1,4 +1,4 @@
-package go_web
+package goweb
 
 import (
 	"fmt"
@@ -11,7 +11,7 @@ import (
 
 func FormPost(writer http.ResponseWriter, request *http.Request) {
 	err := request.ParseForm()
-	if (err != nil) {
+	if err != nil {
 		panic(err)
 	}
 

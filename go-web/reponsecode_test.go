@@ -1,4 +1,4 @@
-package go_web
+package goweb
 
 import (
 	"fmt"
@@ -10,7 +10,7 @@ import (
 
 func ResponseCode(writer http.ResponseWriter, request *http.Request) {
 	name := request.URL.Query().Get("name")
-	if  name == "" {
+	if name == "" {
 		writer.WriteHeader(http.StatusBadRequest)
 		fmt.Fprint(writer, "name is required")
 	} else {
@@ -31,4 +31,3 @@ func TestResponseCode(t *testing.T) {
 	fmt.Println(response.Status)
 	fmt.Println(string(body))
 }
-

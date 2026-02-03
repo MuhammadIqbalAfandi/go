@@ -1,4 +1,4 @@
-package go_web
+package goweb
 
 import (
 	"bytes"

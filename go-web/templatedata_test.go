@@ -1,4 +1,4 @@
-package go_web
+package goweb
 
 import (
 	"fmt"
@@ -10,12 +10,12 @@ import (
 )
 
 func TemplateData(writer http.ResponseWriter, request *http.Request) {
-		t := template.Must(template.ParseFiles("./templates/data.gohtml"))
+	t := template.Must(template.ParseFiles("./templates/data.gohtml"))
 
-		t.ExecuteTemplate(writer, "data.gohtml", map[string]interface{}{
-			"Title": "Learning Golang Web Template",
-			"Name": "Ciaa",
-		})
+	t.ExecuteTemplate(writer, "data.gohtml", map[string]interface{}{
+		"Title": "Learning Golang Web Template",
+		"Name":  "Ciaa",
+	})
 }
 
 func TestTemplateData(t *testing.T) {
@@ -23,7 +23,7 @@ func TestTemplateData(t *testing.T) {
 	recorder := httptest.NewRecorder()
 
 	TemplateData(recorder, request)
-	
+
 	response := recorder.Result()
 	body, _ := io.ReadAll(response.Body)
 	fmt.Println(string(body))
@@ -35,12 +35,12 @@ type Page struct {
 }
 
 func TemplateDataStruct(writer http.ResponseWriter, request *http.Request) {
-		t := template.Must(template.ParseFiles("./templates/data.gohtml"))
+	t := template.Must(template.ParseFiles("./templates/data.gohtml"))
 
-		t.ExecuteTemplate(writer, "data.gohtml", Page {
-			Title: "Learning Golang Web Template",
-			Name: "Ciaa",
-		})
+	t.ExecuteTemplate(writer, "data.gohtml", Page{
+		Title: "Learning Golang Web Template",
+		Name:  "Ciaa",
+	})
 }
 
 func TestTemplateDataStruct(t *testing.T) {
@@ -48,7 +48,7 @@ func TestTemplateDataStruct(t *testing.T) {
 	recorder := httptest.NewRecorder()
 
 	TemplateDataStruct(recorder, request)
-	
+
 	response := recorder.Result()
 	body, _ := io.ReadAll(response.Body)
 	fmt.Println(string(body))

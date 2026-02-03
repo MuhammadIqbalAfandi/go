@@ -1,4 +1,4 @@
-package go_web
+package goweb
 
 import (
 	"embed"
@@ -18,7 +18,7 @@ func TemplateEmbed(writer http.ResponseWriter, request *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	
+
 	t.ExecuteTemplate(writer, "simple.gohtml", "Hello My name is Ciaa")
 }
 
