@@ -20,13 +20,13 @@ func sum(a []int, c chan int) {
 }
 
 func main() {
-		nums := []int{1, 2, 3, 4, 5}
-		c := make(chan int)
-		defer close(c)
+	nums := []int{1, 2, 3, 4, 5}
+	c := make(chan int)
+	defer close(c)
 
-		go sum(nums, c)
+	go sum(nums, c)
 
-		result := <- c
+	result := <-c
 
-		fmt.Println("Sum:", result)
+	fmt.Println("Sum:", result)
 }
