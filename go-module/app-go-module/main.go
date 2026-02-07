@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	go_say_hello "github.com/MuhammadIqbalAfandi/go-say-hello/v2"
+	gosayhello "github.com/MuhammadIqbalAfandi/go-say-hello/v2"
 )
 
 func main() {
-	fmt.Println(go_say_hello.SayHello("Iqbal"))
+	fmt.Println(gosayhello.SayHello("Iqbal"))
 }
