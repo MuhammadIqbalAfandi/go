@@ -1,0 +1,25 @@
+### Get all categories
+GET http://localhost:8080/api/categories
+Accept: application/json
+
+### Create new category
+POST http://localhost:8080/api/categories
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Pants"
+}
+
+### Update category by id
+PUT http://localhost:8080/api/categories/3
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### Delete category by id
+DELETE http://localhost:8080/api/categories/4
+Accept: application/json
