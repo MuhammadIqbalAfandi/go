@@ -8,16 +8,16 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "Pants"
+  "name": "test"
 }
 
 ### Update category by id
-PUT http://localhost:8080/api/categories/3
+PUT http://localhost:8080/api/categories/4
 Accept: application/json
 Content-Type: application/json
 
 {
-  "name": ""
+  "name": "hats"
 }
 
 ### Delete category by id

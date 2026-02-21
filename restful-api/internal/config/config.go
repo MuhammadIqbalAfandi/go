@@ -1,9 +1,11 @@
 package config
 
-import "os"
+import (
+	"restfull-api/internal/shared"
+)
 
 type Config struct {
-	AppPort  string
+	AppEnv   string
 	Database DatabaseConfig
 }
 
@@ -16,23 +18,42 @@ type DatabaseConfig struct {
 	SSLMode string
 }
 
-func getEnv(key, defaultValue string) string {
-	if val := os.Getenv(key); val != "" {
-		return val
-	}
-	return defaultValue
-}
-
 func Load() Config {
-	return Config{
-		AppPort: getEnv("APP_PORT", "8080"),
-		Database: DatabaseConfig{
-			Host:    getEnv("DATABASE_HOST", "localhost"),
-			Port:    getEnv("DATABASE_PORT", "5432"),
-			User:    getEnv("DATABASE_USER", "postgres"),
-			Pass:    getEnv("DATABASE_PASS", "postgres"),
-			DBName:  getEnv("DATABASE_NAME", "golang_restful_api"),
-			SSLMode: getEnv("DATABASE_SSLMODE", "disable"),
-		},
+	env := shared.GetEnv("APP_ENV", "dev")
+
+	cfg := Config{
+		AppEnv: env,
 	}
+
+	switch env {
+	case "prod":
+		cfg.Database = DatabaseConfig{
+			Host:    shared.GetEnv("DATABASE_HOST", "localhost"),
+			Port:    shared.GetEnv("DATABASE_PORT", "5432"),
+			User:    shared.GetEnv("DATABASE_USER", "postgres"),
+			Pass:    shared.GetEnv("DATABASE_PASS", "postgres"),
+			DBName:  shared.GetEnv("DATABASE_NAME", "golang_restful_api"),
+			SSLMode: shared.GetEnv("DATABASE_SSLMODE", "disable"),
+		}
+	case "testing":
+		cfg.Database = DatabaseConfig{
+			Host:    shared.GetEnv("DATABASE_HOST", "localhost"),
+			Port:    shared.GetEnv("DATABASE_PORT", "5432"),
+			User:    shared.GetEnv("DATABASE_USER", "postgres"),
+			Pass:    shared.GetEnv("DATABASE_PASS", "postgres"),
+			DBName:  shared.GetEnv("DATABASE_NAME", "go_restfulapi_test"),
+			SSLMode: "disable",
+		}
+	default:
+		cfg.Database = DatabaseConfig{
+			Host:    shared.GetEnv("DATABASE_HOST", "localhost"),
+			Port:    shared.GetEnv("DATABASE_PORT", "5432"),
+			User:    shared.GetEnv("DATABASE_USER", "postgres"),
+			Pass:    shared.GetEnv("DATABASE_PASS", "postgres"),
+			DBName:  shared.GetEnv("DATABASE_NAME", "go_restfulapi"),
+			SSLMode: "disable",
+		}
+	}
+
+	return cfg
 }
