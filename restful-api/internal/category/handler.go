@@ -47,6 +47,7 @@ func (handler *handler) Create(writer http.ResponseWriter, request *http.Request
 		}
 
 		writer.Header().Add("Content-Type", "application/json")
+		writer.WriteHeader(http.StatusInternalServerError)
 		encoder := json.NewEncoder(writer)
 		err = encoder.Encode(handlerResponse)
 		return
@@ -95,6 +96,7 @@ func (handler *handler) Update(writer http.ResponseWriter, request *http.Request
 		}
 
 		writer.Header().Add("Content-Type", "application/json")
+		writer.WriteHeader(http.StatusInternalServerError)
 		encoder := json.NewEncoder(writer)
 		err = encoder.Encode(handlerResponse)
 		return
@@ -124,7 +126,18 @@ func (handler *handler) Delete(writer http.ResponseWriter, request *http.Request
 
 	err = handler.Service.Delete(request.Context(), categoryId)
 	if err != nil {
-		http.Error(writer, err.Error(), http.StatusInternalServerError)
+		// http.Error(writer, err.Error(), http.StatusInternalServerError)
+
+		handlerResponse := HandlerResponse{
+			Code:   http.StatusInternalServerError,
+			Status: "Internal Server Error",
+			Data:   err.Error(),
+		}
+
+		writer.Header().Add("Content-Type", "application/json")
+		writer.WriteHeader(http.StatusInternalServerError)
+		encoder := json.NewEncoder(writer)
+		err = encoder.Encode(handlerResponse)
 		return
 	}
 
@@ -151,7 +164,18 @@ func (handler *handler) FindById(writer http.ResponseWriter, request *http.Reque
 
 	response, err := handler.Service.FindById(request.Context(), categoryId)
 	if err != nil {
-		http.Error(writer, err.Error(), http.StatusInternalServerError)
+		// http.Error(writer, err.Error(), http.StatusInternalServerError)
+
+		handlerResponse := HandlerResponse{
+			Code:   http.StatusInternalServerError,
+			Status: "Internal Server Error",
+			Data:   err.Error(),
+		}
+
+		writer.Header().Add("Content-Type", "application/json")
+		writer.WriteHeader(http.StatusInternalServerError)
+		encoder := json.NewEncoder(writer)
+		err = encoder.Encode(handlerResponse)
 		return
 	}
 
@@ -173,7 +197,18 @@ func (handler *handler) FindById(writer http.ResponseWriter, request *http.Reque
 func (handler *handler) FindAll(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	responses, err := handler.Service.FindAll(request.Context())
 	if err != nil {
-		http.Error(writer, err.Error(), http.StatusInternalServerError)
+		// http.Error(writer, err.Error(), http.StatusInternalServerError)
+
+		handlerResponse := HandlerResponse{
+			Code:   http.StatusInternalServerError,
+			Status: "Internal Server Error",
+			Data:   err.Error(),
+		}
+
+		writer.Header().Add("Content-Type", "application/json")
+		writer.WriteHeader(http.StatusInternalServerError)
+		encoder := json.NewEncoder(writer)
+		err = encoder.Encode(handlerResponse)
 		return
 	}
 
