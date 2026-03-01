@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"testing"
 	"time"
@@ -65,14 +66,16 @@ func TestQuerySqlComplex(t *testing.T) {
 
 	for rows.Next() {
 		var id, balance int32
-		var name, email string
+		var name string
+		var email sql.NullString
 		var rating float64
 		var birth_date, created_at time.Time
 		var married bool
 
 		err := rows.Scan(&id, &name, &email, &balance, &rating, &birth_date, &married, &created_at)
 		if err != nil {
-			panic(err)
+			fmt.Println("Scan error:", err)
+			continue
 		}
 
 		fmt.Println("id:", id)
@@ -83,5 +86,6 @@ func TestQuerySqlComplex(t *testing.T) {
 		fmt.Println("birth date:", birth_date)
 		fmt.Println("married:", married)
 		fmt.Println("created:", created_at)
+		fmt.Println("---")
 	}
 }

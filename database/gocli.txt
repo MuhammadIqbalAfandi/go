@@ -1,2 +1,7 @@
 go mod init database
 go get github.com/jackc/pgx/v5
+
+go clean -testcache
+go test -v -run TestQuerySqlComplex
+go test -v 
+
