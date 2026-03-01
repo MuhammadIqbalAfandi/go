@@ -89,3 +89,105 @@ func TestQuerySqlComplex(t *testing.T) {
 		fmt.Println("---")
 	}
 }
+
+func TestQuerySqlParameter(t *testing.T) {
+	db := GetConnection()
+	defer db.Close()
+
+	ctx := context.Background()
+
+	username := "admin"
+	password := "admin"
+
+	query := "SELECT username, password FROM public.user WHERE username = $1 AND password = $2"
+	rows, err := db.QueryContext(ctx, query, username, password)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	if rows.Next() {
+		var username, password string
+		err := rows.Scan(&username, &password)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println("username:", username)
+		fmt.Println("password:", password)
+		fmt.Println("Login success")
+	}
+}
+
+func TestIncrement(t *testing.T) {
+	db := GetConnection()
+	defer db.Close()
+
+	ctx := context.Background()
+
+	var insertId int64
+	query := "INSERT INTO comments(email, comment) VALUES('mark@example.com', 'Hello World') RETURNING id"
+	err := db.QueryRowContext(ctx, query).Scan(&insertId)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Success insert new comment with ID:", insertId)
+}
+
+func TestPrepareStatement(t *testing.T) {
+	db := GetConnection()
+	defer db.Close()
+
+	ctx := context.Background()
+	query := "INSERT INTO comments(email, comment) VALUES($1, $2) RETURNING id"
+	stmt, err := db.PrepareContext(ctx, query)
+	if err != nil {
+		panic(err)
+	}
+	defer stmt.Close()
+
+	for i := 0; i < 10; i++ {
+		email := fmt.Sprintf("user%d@example.com", i)
+		comment := fmt.Sprintf("Comment number %d", i)
+
+		var insertId int64
+		err := stmt.QueryRowContext(ctx, email, comment).Scan(&insertId)
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Printf("Success insert new comment with ID: %d\n", insertId)
+	}
+}
+
+func TestTransaction(t *testing.T) {
+	db := GetConnection()
+	defer db.Close()
+
+	ctx := context.Background()
+
+	tx, err := db.Begin()
+	if err != nil {
+		panic(err)
+	}
+
+	query := "INSERT INTO comments(email, comment) VALUES($1, $2) RETURNING id"
+
+	for i := 0; i < 10; i++ {
+		email := fmt.Sprintf("user%d@example.com", i)
+		comment := fmt.Sprintf("Comment number %d", i)
+
+		var insertId int64
+		err := tx.QueryRowContext(ctx, query, email, comment).Scan(&insertId)
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Printf("Success insert new comment with ID: %d\n", insertId)
+	}
+
+	err = tx.Rollback()
+	if err != nil {
+		panic(err)
+	}
+}
