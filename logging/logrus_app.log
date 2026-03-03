@@ -1,0 +1,9 @@
+time="2026-03-03T21:59:11+07:00" level=info msg="This log message will be written to the file."
+time="2026-03-03T21:59:11+07:00" level=warning msg="This is a warning message in the file."
+time="2026-03-03T21:59:11+07:00" level=error msg="This is an error message in the file."
+{"level":"info","msg":"This log message will be in JSON format.","time":"2026-03-03T22:03:56+07:00"}
+{"level":"warning","msg":"This log message will also be in JSON format.","time":"2026-03-03T22:03:56+07:00"}
+{"level":"error","msg":"This log message will be in JSON format as well.","time":"2026-03-03T22:03:56+07:00"}
+{"level":"info","msg":"This log message will be in JSON format.","time":"2026-03-03T22:10:38+07:00","username":"iqbal"}
+{"level":"warning","msg":"This log message will also be in JSON format.","name":"iqbal","time":"2026-03-03T22:10:38+07:00","username":"iqball"}
+{"level":"info","msg":"This log message will be in JSON format.","name":"cia","time":"2026-03-03T22:12:33+07:00","username":"ciaa"}
