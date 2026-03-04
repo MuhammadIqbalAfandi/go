@@ -5,6 +5,7 @@ go 1.25.6
 require (
 	github.com/go-playground/validator/v10 v10.30.1
 	github.com/jackc/pgx/v5 v5.8.0
+	github.com/joho/godotenv v1.5.1
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/stretchr/testify v1.11.1
 )
