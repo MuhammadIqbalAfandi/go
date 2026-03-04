@@ -1,0 +1,10 @@
+app:
+  name: "Viper"
+  version: "1.0.0"
+  authors: "Iqbal"
+database:
+  host: "localhost"
+  port: 5432
+  username: "postgres"
+  password: "postgres"
+  name: "postgres"

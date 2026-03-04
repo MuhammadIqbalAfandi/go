@@ -1,0 +1,5 @@
+ go mod init viper 
+
+ go get github.com/spf13/viper
+
+ go get github.com/stretchr/testify
